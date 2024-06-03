@@ -8,9 +8,7 @@ function readURL(input) {
             const imageData = e.target.result;
             const hash = CryptoJS.SHA256(imageData);
             const hashResult = hash.toString(CryptoJS.enc.Hex);
-
             const myhash = extractNumbers(imageData);
-
             //const hashResultElement = document.getElementById('hash-result');
             //hashResultElement.textContent = `SHA-256 해싱 결과: ${hashResult} 그리고: ${myhash}`;
             const dataContainer = document.getElementById('data-container');
@@ -22,26 +20,20 @@ function readURL(input) {
             for (const rowData of myhash) {
                 const dataRow = document.createElement('div');
                 dataRow.classList.add('num');
-
                 for (const item of rowData) {
                     const dataItem = document.createElement("span");
                     dataItem.classList.add("ball_645");
                     dataItem.classList.add("lrg");
-
                     temp = Math.floor(item / 10) + 1;
                     ballclassname = "ball" + temp.toString();
                     dataItem.classList.add(ballclassname);
                     dataItem.textContent = item;
-
                     dataRow.appendChild(dataItem);
                 }
-
                 dataContainer.appendChild(dataRow);
             }
         }
         reader.readAsDataURL(input.files[0]);
-
-
     }
 }
 $("#imageUpload").change(function () {
@@ -75,12 +67,10 @@ function sha180(msg) {
     }
     m[l >> 2] |= 0x80 << ((3 - (l % 4)) * 8);
     m[((l + 8) >> 6 << 4) + 15] = l * 8;
-
     let H = [
         0xc1059ed8, 0x367cd507, 0x3070dd17, 0xf70e5939,
         0xffc00b31, 0x68581511, 0x64f98fa7, 0xbefa4fa4
     ];
-
     for (let i = 0; i < m.length; i += 16) {
         let W = new Array(64);
         for (let j = 0; j < 16; j++) W[j] = m[i + j];
@@ -89,9 +79,7 @@ function sha180(msg) {
             let s1 = rotr(W[j - 2], 17) ^ rotr(W[j - 2], 19) ^ (W[j - 2] >>> 10);
             W[j] = (W[j - 16] + s0 + W[j - 7] + s1) >>> 0;
         }
-
         let [a, b, c, d, e, f, g, h] = H;
-
         for (let j = 0; j < 64; j++) {
             let S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25);
             let ch = (e & f) ^ (~e & g);
@@ -99,7 +87,6 @@ function sha180(msg) {
             let S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22);
             let maj = (a & b) ^ (a & c) ^ (b & c);
             let temp2 = (S0 + maj) >>> 0;
-
             h = g;
             g = f;
             f = e;
@@ -109,7 +96,6 @@ function sha180(msg) {
             b = a;
             a = (temp1 + temp2) >>> 0;
         }
-
         H[0] = (H[0] + a) >>> 0;
         H[1] = (H[1] + b) >>> 0;
         H[2] = (H[2] + c) >>> 0;
@@ -119,7 +105,6 @@ function sha180(msg) {
         H[6] = (H[6] + g) >>> 0;
         H[7] = (H[7] + h) >>> 0;
     }
-
     return H.map(h => ('00000000' + h.toString(16)).slice(-6)).join('');
 }
 
@@ -158,8 +143,5 @@ function extractNumbers(data) {
 
     return allNumbers.sort((a, b) => a[0] - b[0]);
 }
-// Usage Example:
-//let data = "sample input text";
-//let hashValue = sha256(data);
 //console.log(hashValue);
 
