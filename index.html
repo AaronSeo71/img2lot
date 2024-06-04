@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>이미지를 로또로</title>
+    <title>사진으로 로또번호 생성하기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <meta name="format-detection" content="telephone=no">
@@ -21,7 +21,7 @@
             <label for="imageUpload" class="label-upload">
                 <i id="upload" class="fas fa-upload"></i>
             </label>
-<!--             <label for="imageUpload" class="label-upload">
+            <!--             <label for="imageUpload" class="label-upload">
                 <i id="camera" class="fas fa-camera"></i>
             </label> -->
 
@@ -39,6 +39,24 @@
     <footer>
         <p>&copy; 2024 Aaron Seo</p>
     </footer>
+    <!-- 라이브리 시티 설치 코드 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81OTg5MC8zNjM1Mg==">
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+
+                if (typeof LivereTower === 'function') { return; }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript> 라이브리 댓글 작성을 위해 JavaScript를 활성화 해주세요</noscript>
+    </div>
+    <!-- 시티 설치 코드 끝 -->
 </body>
 
 </html>
