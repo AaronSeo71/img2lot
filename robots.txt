@@ -1,0 +1,4 @@
+user-Agent: *
+Allow: /
+
+sitemap: https://pic2lot.netlify.app/sitemap.xml
