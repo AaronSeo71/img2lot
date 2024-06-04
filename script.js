@@ -1,13 +1,29 @@
 function readURL(input) {
     if (input.files && input.files[0]) {
+        const file = input.files[0];
         var reader = new FileReader();
         reader.onload = function (e) {
             $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
             $('#imagePreview').hide();
             $('#imagePreview').fadeIn(650);
+
+            // Show preview for images
+            const fileContent = e.target.result;
+
+            if (file.type.startsWith('image/')) {
+                document.getElementById('imagePreview').innerHTML = '';
+            } else {
+                // Show first 100 characters for other files
+                $('#imagePreview').css('background-image', 'url()');
+                const textPreview = document.createElement('div');
+                textPreview.innerText = fileContent.slice(0, 1000) + '...';
+                document.getElementById('imagePreview').innerHTML = '';
+                document.getElementById('imagePreview').appendChild(textPreview);
+            }
+
             const imageData = e.target.result;
-            const hash = CryptoJS.SHA256(imageData);
-            const hashResult = hash.toString(CryptoJS.enc.Hex);
+            //const hash = CryptoJS.SHA256(imageData);
+            //const hashResult = hash.toString(CryptoJS.enc.Hex);
             const myhash = extractNumbers(imageData);
             //const hashResultElement = document.getElementById('hash-result');
             //hashResultElement.textContent = `SHA-256 해싱 결과: ${hashResult} 그리고: ${myhash}`;
@@ -24,7 +40,7 @@ function readURL(input) {
                     const dataItem = document.createElement("span");
                     dataItem.classList.add("ball_645");
                     dataItem.classList.add("lrg");
-                    temp = Math.floor(item / 10) + 1;
+                    temp = Math.floor(item / 9) + 1;
                     ballclassname = "ball" + temp.toString();
                     dataItem.classList.add(ballclassname);
                     dataItem.textContent = item;
@@ -33,7 +49,12 @@ function readURL(input) {
                 dataContainer.appendChild(dataRow);
             }
         }
-        reader.readAsDataURL(input.files[0]);
+        //reader.readAsDataURL(input.files[0]);
+        if (file.type.startsWith('image/')) {
+            reader.readAsDataURL(file);
+        } else {
+            reader.readAsText(file);
+        }
     }
 }
 $("#imageUpload").change(function () {
