@@ -40,7 +40,7 @@ function readURL(input) {
                     const dataItem = document.createElement("span");
                     dataItem.classList.add("ball_645");
                     dataItem.classList.add("lrg");
-                    temp = Math.floor(item / 9) + 1;
+                    temp = Math.floor(item / 10) + 1;
                     ballclassname = "ball" + temp.toString();
                     dataItem.classList.add(ballclassname);
                     dataItem.textContent = item;
